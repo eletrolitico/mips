@@ -1,3 +1,5 @@
-module cpu();
+module cpu(
+	input
+);
 
 endmodule 
