@@ -6,9 +6,9 @@ module pc(
 	always @(posedge clk, posedge rst) 
 	begin
 		if (rst)
-			count = 0;
+			count = 9'b0;
 		else 
-			count = count + 1;
+			count = count + 9'b1;
 	end
 
 endmodule

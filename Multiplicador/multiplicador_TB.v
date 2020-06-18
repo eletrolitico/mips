@@ -15,9 +15,11 @@ module multiplicador_TB ();
 		.Produto(Produto)
 	);
 
+	integer count;
 	initial
 	begin	
 		Clk = 0;
+		count = 0;
 		
 		#5 St = 1;
 		Multiplicando = 16'd12;
@@ -41,7 +43,9 @@ module multiplicador_TB ();
 	always 
 	begin
 		#2 Clk = ~Clk;
-		if (Clk)
-			$display("Multiplicando: ", Multiplicando, " Multiplicador: ", Multiplicador, " Produto: ", Produto, " Idle: ", Idle, " Done: ", Done);
+		if (Clk) begin
+			$display("Multiplicando: ", Multiplicando, " Multiplicador: ", Multiplicador, " Produto: ", Produto, " Idle: ", Idle, " Done: ", Done," Count: ",count);
+			count = count + 1;
+		end
 	end
 endmodule 

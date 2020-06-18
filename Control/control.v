@@ -30,19 +30,6 @@ module control(
    OR 001100	00000		00000		00000		01010	100101
 */
 
-	initial 
-	begin
-		rs = 5'b0;
-		rt = 5'b0;
-		rd = 5'b0;
-		rf_wr = 0;
-		mux_writeback = 0;
-		mem_wr = 0;
-		mux_alu_out = 1;
-		start = 0;
-		alu_op = 0;
-		mux_alu_in = 0;
-	end
 
 	always @ (instruction) 
 	begin
@@ -60,7 +47,7 @@ module control(
 				mux_alu_in = 1;    //Usa extend como entrada
 				mux_alu_out = 1; 	 //Usa a saida da alu
 				start = 0;         //Desabilita o multiplicador
-				mux_writeback = 1; //Seleciona o pagefile para writeback
+				mux_writeback = 1; //Seleciona o M para writeback
 			end
 			5'd14: 				 //SW
 			begin 
@@ -71,7 +58,7 @@ module control(
 				mux_alu_in = 1;    //Usa extend como entrada
 				mux_alu_out = 1;   //Usa a saida da alu
 				start = 0;         //Desabilita o multiplicador
-				mux_writeback = 1; //Seleciona o pagefile para writeback
+				mux_writeback = 1; //Seleciona o M para writeback
 			end
 			5'd12: 						 //Operação aritmética
 			begin  
@@ -80,6 +67,7 @@ module control(
 				mux_alu_in = 0;          //Usa B como entrada
 				start = 0;               //Inica o multiplicador desabilitado
 				mux_writeback = 0;       //Seleciona o registro D para writeback
+				mem_wr = 0;
 				case(op)
 					6'd32: //Soma 
 					begin 
@@ -106,6 +94,11 @@ module control(
 					begin
 						alu_op = 2'd3;
 						mux_alu_out = 1; //Usa a saida da ALU
+					end
+					default:
+					begin
+						alu_op = 2'd0;
+						mux_alu_out = 1;
 					end
 				endcase
 			end

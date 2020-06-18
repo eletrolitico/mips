@@ -16,12 +16,11 @@ module alu_TB();
 	initial begin
 		B = 8'h03; //0011
 		A = 8'h04; //0100
-		ALU_Sel = 0;
 		
-		for(i = 0; i < 9; i = i + 1)
+		for(i = 0; i < 4; i = i + 1)
 		begin
+			ALU_Sel = i;
 			#10;
-			ALU_Sel = ALU_Sel + 1'b1;
 		end
 	
 		#10 $stop;
