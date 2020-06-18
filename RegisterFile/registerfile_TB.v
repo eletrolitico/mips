@@ -2,7 +2,7 @@
 module registerfile_TB();
 
 	reg [4:0] rs, rt, rd; 
-	reg write, clk;
+	reg write, clk,rst;
 	reg [31:0] in; 
 	wire [31:0] A,B; 
 	
@@ -14,18 +14,20 @@ module registerfile_TB();
 		.clk(clk),
 		.A(A),
 		.B(B),
-		.write(write)
+		.write(write),
+		.rst(rst)
 	);
 	
 	
 	initial begin
 		clk = 0;
+		rst=0;
 		write = 0;
 		rs = 10;
 		rt = 10;
+		#5 rst=1;
 		
-		
-		#25;
+		#20;
 		in = 32'd11;
 		rd = 5'd0;
 		#2 write = 1;
