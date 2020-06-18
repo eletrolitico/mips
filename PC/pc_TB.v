@@ -1,5 +1,4 @@
 `timescale 1ns/10ps
-
 module pc_TB();
 
 	parameter SZ = 10;
@@ -16,7 +15,8 @@ module pc_TB();
 	always 
 		#2 clk = ~clk;
 		
-	initial begin
+	initial 
+	begin
 		rst = 1;
 		clk = 0;
 		
@@ -25,8 +25,6 @@ module pc_TB();
 		rst = 0;
 		
 		#100 $stop;
-		
 	end
-	
 
 endmodule 

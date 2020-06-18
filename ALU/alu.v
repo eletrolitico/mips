@@ -9,9 +9,7 @@ module alu(A, B, ALU_Sel, ALU_Out);
 	
 	always @(*) 
 	begin
-	
 		case(ALU_Sel)
-			
 			4'd0: begin ALU_Out <= A + B; end											//add
 			4'd1: begin ALU_Out <= A + B; end											//add_u
 			4'd2: begin ALU_Out <= A - B; end											//sub
@@ -21,11 +19,8 @@ module alu(A, B, ALU_Sel, ALU_Out);
 			4'd6: begin ALU_Out <= A ^ B; end											//xor
 			4'd7: begin ALU_Out <= (A < B ? 1 : 0); end								//slt
 			4'd8: begin ALU_Out <= ($signed(A) < $signed(B) ? 1 : 0); end		//slt_u
-			
 			default: ALU_Out <= A & B;
-		
 		endcase
-	
 	end
 	
 endmodule 

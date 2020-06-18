@@ -14,11 +14,10 @@ module mux_TB();
 	);
 	
 	
-	initial begin
-		
+	initial 
+	begin
 		A = 24;
 		B = 30;
-		
 		S = 0;
 		
 		#10;
@@ -26,7 +25,6 @@ module mux_TB();
 		S = 1;
 		
 		#10 $stop;
-	
 	end
 	
 

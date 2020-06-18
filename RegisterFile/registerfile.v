@@ -1,22 +1,25 @@
-module registerfile(rs,rt,rd,in,write,clk,A,B);
-
-	input [4:0]	rs,rt,rd;
-	input	[31:0] in;
-	input write,clk;
-   output reg [31:0] A,B;
+module registerfile (
+	input [4:0]	rs,rt,rd,
+	input	[31:0] in,
+	input write,clk,
+   output reg [31:0] A,B
+	);
 
 	integer k;
 	
 	reg [31:0] M [0:15];
 
-	initial begin
-		for(k = 0; k < 16; k = k+1) M[k] = 0;
-	end
+	/*initial 
+	begin
+		for(k = 0; k < 16; k = k+1) 
+		begin
+			M[k] = 32'b0;
+		end
+	end*/ // ARRUMAR PORQUE NÃO FUNCIONA
 	
 	always@(negedge clk) begin
 		if (write) 
 			M[rd] <= in;
-		
 	end
 	
 	always@(posedge clk) begin
@@ -24,5 +27,4 @@ module registerfile(rs,rt,rd,in,write,clk,A,B);
 			B <= M[rt];
 	end
 	
-	
-	endmodule
+endmodule

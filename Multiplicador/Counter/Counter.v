@@ -1,6 +1,7 @@
 module Counter(
 	input Load, Clk,
-	output K);
+	output K
+	);
 	 
 	reg [5:0] cont;
 	

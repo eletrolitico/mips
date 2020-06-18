@@ -18,7 +18,8 @@ module Register_TB();
 	always
 		#2 clk = ~clk;
 	
-	initial begin
+	initial 
+	begin
 		rst = 1;
 		clk = 0;
 		
@@ -32,9 +33,7 @@ module Register_TB();
 		end
 
 		#10 $stop;
-	
 	end
-	
 	
 endmodule
 	

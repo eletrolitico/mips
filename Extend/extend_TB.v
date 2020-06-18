@@ -6,7 +6,8 @@ module extend_TB();
 
 	extend DUT(.in(in),.out(out));
 
-	initial begin
+	initial 
+	begin
 		in = 16'h0;
 		#10 in = 16'hDE12;
 		#10 in = 16'd1239;

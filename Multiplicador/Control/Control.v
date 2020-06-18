@@ -1,7 +1,7 @@
 module Control (
 	input M, Clk, St, K,
 	output reg Idle, Done, Load, Sh, Ad
-);
+	);
 
 	parameter S0 = 0, S1 = 1, S2 = 2, S3 = 3;
 	(* syn_encoding = "safe" *) reg [1:0] estadoatual, estadoseguinte;

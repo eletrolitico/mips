@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module datamemory_TB();
 
 	parameter DATA_IN_SZ  = 32;
@@ -21,17 +22,15 @@ module datamemory_TB();
 
 	always 
 		#2 clk = ~clk;
-	
+
 	initial 
 	begin
-		
 		clk = 0;
 		we = 0;
 		data_in = 0;
 		address = 0;
-	
-		#10;
-		
+
+		#10
 		we = 1;
 		
 		for(i = 0; i < 5; i = i + 1)
@@ -42,7 +41,6 @@ module datamemory_TB();
 		end
 		
 		#10
-		
 		we = 0;
 		data_in = 0;
 		
@@ -52,9 +50,7 @@ module datamemory_TB();
 			address = i;
 		end
 		
-		
 		#10 $stop;
-	
 	end
 
 endmodule 
