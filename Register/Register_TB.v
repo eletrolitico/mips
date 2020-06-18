@@ -1,10 +1,8 @@
 module Register_TB();
 
-	parameter SZ = 32;
-
 	reg rst, clk;
-	reg  [SZ - 1: 0] D;
-	wire [SZ - 1: 0] Q;
+	reg [31:0] D;
+	wire [31:0] Q;
 	
 	integer i;
 	

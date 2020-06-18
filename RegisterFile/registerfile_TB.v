@@ -19,7 +19,8 @@ module registerfile_TB();
 	);
 	
 	
-	initial begin
+	initial 
+	begin
 		clk = 0;
 		rst=0;
 		write = 0;
@@ -59,7 +60,6 @@ module registerfile_TB();
 		rs = 5'd3;
 		rt = 5'd5;
 		#30 $stop;
-
 	end
 	
 	always #15 clk = ~clk;

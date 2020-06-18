@@ -3,7 +3,10 @@ module ADDRDecoding_TB();
 
 	reg [31:0] addr;
 	wire cs;
-	ADDRDecoding DUT(.addr(addr),.cs(cs));
+	ADDRDecoding DUT(
+		.addr(addr),
+		.cs(cs)
+	);
 
 	integer i;
 

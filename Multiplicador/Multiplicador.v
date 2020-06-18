@@ -1,4 +1,4 @@
-module Multiplicador (
+module multiplicador (
 	input [15:0] Multiplicador, Multiplicando,
 	input St, Clk,
 	output [31:0] Produto,

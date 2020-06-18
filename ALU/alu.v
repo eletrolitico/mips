@@ -1,11 +1,8 @@
-module alu(A, B, ALU_Sel, ALU_Out);
-
-	parameter width_SZ 	= 32;
-	parameter op_sz 		= 4;
-	
-	input [width_SZ - 1:0] A, B;
-	input [op_sz - 1:0] ALU_Sel;
-	output reg [width_SZ - 1:0] ALU_Out;
+module alu(	
+	input [31:0] A, B,
+	input [3:0] ALU_Sel,
+	output reg [31:0] ALU_Out
+	);
 	
 	always @(*) 
 	begin

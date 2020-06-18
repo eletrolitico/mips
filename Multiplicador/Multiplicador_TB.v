@@ -1,11 +1,11 @@
 `timescale 1ns/10ps
-module Multiplicador_TB ();
+module multiplicador_TB ();
 	reg St, Clk;
 	reg [15:0] Multiplicando, Multiplicador;
 	wire Idle, Done;
 	wire [31:0] Produto;
 	
-	Multiplicador DUT (
+	multiplicador DUT (
 		.St(St),
 		.Clk(Clk),
 		.Multiplicando(Multiplicando),

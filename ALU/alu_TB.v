@@ -1,12 +1,9 @@
 `timescale 1ns/10ps
 module alu_TB();
-
-	parameter width_SZ 	= 32;
-	parameter op_sz 		= 4;
 	
-	reg [width_SZ - 1:0] A, B;
-	reg [op_sz - 1:0] ALU_Sel;
-	wire [width_SZ - 1:0] ALU_Out;
+	reg [31:0] A, B;
+	reg [3:0] ALU_Sel;
+	wire [31:0] ALU_Out;
 	
 	integer i;
 	

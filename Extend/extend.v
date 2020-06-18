@@ -1,5 +1,5 @@
 module extend(
-	input [15:0] i,
+	input [15:0] in,
 	output [31:0] out
 	);
 

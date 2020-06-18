@@ -1,9 +1,7 @@
-module pc(rst, clk, count);
-
-	parameter SZ = 10;
-
-	input clk, rst;
-	output reg [SZ - 1 : 0] count;
+module pc(
+	input clk, rst,
+	output reg [9:0] count
+	);
 
 	always @(posedge clk, posedge rst) 
 	begin

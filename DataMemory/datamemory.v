@@ -3,14 +3,13 @@ module datamemory(
 	input  [31:0] data_in,
 	input  [9:0] address,
 	output reg [31:0] data_out
-);
+	);
 	
 	reg [31:0] memory [0:1023];
 	
 	always @(posedge clk) begin
 		if (we) 
 			memory[address] <= data_in;
-		 
 		data_out <= memory[address];
 	end
 	

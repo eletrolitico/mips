@@ -4,9 +4,13 @@ module instructionmemory_TB();
 	reg [10:0] addr;
 	wire [31:0] data_out;
 	
-	instructionmemory DUT(.clk(clk), .addr(addr), .data_out(data_out));
+	instructionmemory DUT(
+		.clk(clk),
+		.addr(addr),
+		.data_out(data_out)
+	);
 	
-	integer i = 0;
+	integer i;
 	
 	initial begin
 		clk = 0;

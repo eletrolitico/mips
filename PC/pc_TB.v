@@ -1,10 +1,8 @@
 `timescale 1ns/10ps
 module pc_TB();
 
-	parameter SZ = 10;
-
 	reg clk, rst;
-	wire [SZ - 1 : 0] count;
+	wire [9:0] count;
 
 	pc DUT(
 		.rst(rst),

@@ -1,14 +1,10 @@
 `timescale 1ns/1ps
 module datamemory_TB();
-
-	parameter DATA_IN_SZ  = 32;
-	parameter DATA_OUT_SZ = 32;
-	parameter ADDRESS_SZ  = 10; // 2 ^ 10
 	
 	reg  clk, we;
-	reg  [DATA_IN_SZ   - 1:0 ] data_in;
-	reg  [ADDRESS_SZ   - 1:0 ] address;
-	wire [DATA_OUT_SZ  - 1:0 ] data_out;
+	reg  [31:0 ] data_in;
+	reg  [9:0 ] address;
+	wire [31:0 ] data_out;
 	
 	integer i;
 	

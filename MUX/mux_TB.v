@@ -1,10 +1,8 @@
 module mux_TB();
 
-	parameter SIZE  = 32;
-
 	reg S;
-	reg [SIZE - 1: 0] A, B;
-	wire [SIZE - 1 : 0] out;
+	reg [31:0] A, B;
+	wire [31:0] out;
 
 	mux DUT(
 		.A(A),

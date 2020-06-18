@@ -1,11 +1,8 @@
-module Register(rst, clk, D, Q);
-
-	parameter SZ = 32;
-
-	input  		rst, clk;
-	input  		[SZ - 1: 0] D;
-	output reg  [SZ - 1: 0] Q;
-	
+module Register(
+	input rst, clk,
+	input [31:0] D,
+	output reg  [31:0] Q
+	);
 	
 	always @(posedge clk or posedge rst) 
 	begin

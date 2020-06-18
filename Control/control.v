@@ -3,7 +3,6 @@ module control(
 	output [22:0] ctrl
 );
 
-
 	reg mem_wr;
 	reg rf_wr;
 	reg [1:0] alu_op;
@@ -18,10 +17,8 @@ module control(
 	reg mux_writeback;
 
 	assign ctrl = {rs, rt, rd, rf_wr, mux_writeback, mem_wr, mux_alu_out, start, alu_op, mux_alu_in};
-/*					5	 5	  5	1		 1					 1			1				 1		  2	 	 1            = 23			*/
-
-/* INSTRUÇÕES */
-/*
+/*					5	 5	  5	1		 1					 1			1				 1		  2	 	 1            = 23			
+   INSTRUÇÕES 
 		OPCODE	RS			RT			OFFSET
 	LW 001101	00000		00000		XXXXXXXXXXXXXXXX
 	SW	001110	00000		00000		XXXXXXXXXXXXXXXX
