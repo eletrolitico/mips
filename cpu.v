@@ -5,6 +5,46 @@ module cpu(
 	output cs,we
 );
 
+	
+	/* 
+	
+		a) Qual a latência do sistema?
+			5 pulsos de clock
+		
+		b) Qual o throughput do sistema?
+			1 instrução por clock quando a pipeline está cheia
+		
+		c) Qual a máxima frequência operacional entregue pelo Time Quest Timing Analizer para o multiplicador e para o sistema? (Indique a FPGA utilizada)
+			A FPGA utilizada foi a EP4CGX150DF31I7AD
+			Para o Multiplicador foi 250MHz
+			Para o Sistema foi 120.02MHz
+		
+		d) Qual a máxima frequência de operação do sistema? (Indique a FPGA utilizada)
+			A FPGA utilizada foi a EP4CGX150DF31I7AD
+			Já que a operação de multiplicação leva 34 pulsos de clock
+			a frequência do sistema deverá ser 34 vezes menor, ou seja, 7,35MHz
+			
+		e) Com a arquitetura implementada, a expressão (A*B) – (C+D) é executada corretamente (se executada em sequência ininterrupta)?
+		Por quê? O que pode ser feito para que a expressão seja calculada corretamente?
+			Não, pois ocorre pipeline hazard, ou seja, nas operações aritméticas o valor não estará presente nas
+			entradas da ALU ou do multiplicador. Para resolver esse problema basta inserir 3 bolhas após as instruções de load na pipeline
+		
+		f) Analisando a sua implementação de dois domínios de clock diferentes, haverá problemas com	metaestabilidade? Por que?
+			
+			
+		g) A aplicação de um multiplicador do tipo utilizado, no sistema MIPS sugerido, é eficiente em termos de velocidade? Por que?
+			Não, pois esse multiplicador possui pipeline enrolada, não há paralelismo e a multiplicação demora pra ser feita
+			
+		h) Cite modificações cabíveis na arquitetura do sistema que tornaria o sistema mais rápido (frequência de
+		operação maior). Para cada modificação sugerida, qual a nova latência e throughput do sistema?
+			
+			
+	
+	*/
+	
+	
+	
+
 
 //Clocks
 wire clk,clkMul;
@@ -67,7 +107,7 @@ wire[31:0] wb_mux_out;
 	ADDRDecoding decoder(.addr(ADDR),.cs(cs));
 	datamemory m2(.clk(clk),.address(ADDR[9:0]),.data_in(DATA_BUS_WRITE),.data_out(mem_out),.we(we),.cs(cs));
 	
-	Register CS(.clk(clk),.rst(rst),.D(cs),.Q(cs_a));
+	ffd CS(.clk(clk),.rst(rst),.d(cs),.q(cs_a));
 	
 	mux mux_mem(.A(DATA_BUS_READ),.B(mem_out),.S(cs_a),.out(M));
 	
@@ -79,21 +119,6 @@ wire[31:0] wb_mux_out;
 //Quinto estágio
 
 	mux mux_wb(.A(d2),.B(M),.S(ct3[6]),.out(wb_mux_out));
-	
-	
-	
-	
-	/* 
-		FMul = 250MHz
-		FSis = FMul/34 = 
-	
-	*/
-	
-	
-	
-	
-	
-	
 	
 	
 endmodule 
