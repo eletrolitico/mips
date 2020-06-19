@@ -66,7 +66,10 @@ wire[31:0] wb_mux_out;
 	assign we = ct2[5];
 	ADDRDecoding decoder(.addr(ADDR),.cs(cs));
 	datamemory m2(.clk(clk),.address(ADDR[9:0]),.data_in(DATA_BUS_WRITE),.data_out(mem_out),.we(we),.cs(cs));
-	mux mux_mem(.A(DATA_BUS_READ),.B(mem_out),.S(cs),.out(M));
+	
+	Register CS(.clk(clk),.rst(rst),.D(cs),.Q(cs_a));
+	
+	mux mux_mem(.A(DATA_BUS_READ),.B(mem_out),.S(cs_a),.out(M));
 	
 //MEM/WB
 	wire [31:0] d2;
