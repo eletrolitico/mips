@@ -22,7 +22,7 @@ module cpu(
 		d) Qual a máxima frequência de operação do sistema? (Indique a FPGA utilizada)
 			A FPGA utilizada foi a EP4CGX150DF31I7AD
 			Já que a operação de multiplicação leva 34 pulsos de clock
-			a frequência do sistema deverá ser 34 vezes menor, ou seja, 7,35MHz
+			a frequência do sistema deverá ser 34 vezes menor, ou seja, 7.35MHz
 			
 		e) Com a arquitetura implementada, a expressão (A*B) – (C+D) é executada corretamente (se executada em sequência ininterrupta)?
 		Por quê? O que pode ser feito para que a expressão seja calculada corretamente?
@@ -30,14 +30,15 @@ module cpu(
 			entradas da ALU ou do multiplicador. Para resolver esse problema basta inserir 3 bolhas após as instruções de load na pipeline
 		
 		f) Analisando a sua implementação de dois domínios de clock diferentes, haverá problemas com	metaestabilidade? Por que?
-			
+			Não, pois os clocks são multiplos inteiros e a PLL sincroniza a fase.
 			
 		g) A aplicação de um multiplicador do tipo utilizado, no sistema MIPS sugerido, é eficiente em termos de velocidade? Por que?
 			Não, pois esse multiplicador possui pipeline enrolada, não há paralelismo e a multiplicação demora pra ser feita
 			
 		h) Cite modificações cabíveis na arquitetura do sistema que tornaria o sistema mais rápido (frequência de
 		operação maior). Para cada modificação sugerida, qual a nova latência e throughput do sistema?
-			
+			Substituir o multiplicador por um mais eficiente, por exemplo, o já implementado na FPGA. Desse modo, o sistema poderia
+			operar em uma frequência bem maior. A latência e o throughput seriam mantidos.
 			
 	
 	*/
@@ -52,8 +53,9 @@ wire clk,clkMul;
 PLL1 pll1(.areset(rst),.inclk0(clkIn),.c0(clkMul),.c1(clk));
 
 
-wire [31:0] inst,ext_out,imm,ct1,ct2,ct3;
-wire[31:0] wb_mux_out;
+wire [31:0] inst,ext_out,imm;
+wire [22:0] ct1,ct2,ct3;
+wire [31:0] wb_mux_out;
 
 //primeiro estágio
 	wire [9:0]addr_pc;
@@ -82,7 +84,7 @@ wire[31:0] wb_mux_out;
 	
 	
 //ID/EX
-	Register ctrl1(.clk(clk),.rst(rst),.D({9'b0,ctrl_out}),.Q(ct1));
+	Register #(23)ctrl1(.clk(clk),.rst(rst),.D({9'b0,ctrl_out}),.Q(ct1));
 	Register IMM(.clk(clk),.rst(rst),.D(ext_out),.Q(imm));
 	
 //terceiro estágio
@@ -96,7 +98,7 @@ wire[31:0] wb_mux_out;
 	
 //EX/MEM
 	Register D1(.clk(clk),.rst(rst),.D(mux_mul_out),.Q(ADDR));
-	Register ctrl2(.clk(clk),.rst(rst),.D(ct1),.Q(ct2));
+	Register #(23)ctrl2(.clk(clk),.rst(rst),.D(ct1),.Q(ct2));
 	Register B1(.clk(clk),.rst(rst),.D(B),.Q(DATA_BUS_WRITE));
 	
 	
@@ -107,13 +109,13 @@ wire[31:0] wb_mux_out;
 	ADDRDecoding decoder(.addr(ADDR),.cs(cs));
 	datamemory m2(.clk(clk),.address(ADDR[9:0]),.data_in(DATA_BUS_WRITE),.data_out(mem_out),.we(we),.cs(cs));
 	
-	ffd CS(.clk(clk),.rst(rst),.d(cs),.q(cs_a));
+	Register #(1)CS(.clk(clk),.rst(rst),.D(cs),.Q(cs_a));
 	
 	mux mux_mem(.A(DATA_BUS_READ),.B(mem_out),.S(cs_a),.out(M));
 	
 //MEM/WB
 	wire [31:0] d2;
-	Register ctrl3(.clk(clk),.rst(rst),.D(ct2),.Q(ct3));
+	Register #(23)ctrl3(.clk(clk),.rst(rst),.D(ct2),.Q(ct3));
 	Register D2(.clk(clk),.rst(rst),.D(ADDR),.Q(d2));
 
 //Quinto estágio

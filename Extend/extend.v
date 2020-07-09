@@ -3,6 +3,8 @@ module extend(
 	output [31:0] out
 	);
 
-	assign out = {16'b0,in};
+	wire [15:0] rep;
+	assign rep = {16{in[15]}};
+	assign out = {rep,in};
 	
 endmodule 
